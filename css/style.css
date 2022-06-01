@@ -14,8 +14,8 @@ body {
 }
 
 .list-item:hover {
-  color: red;
-  background-color: rgb(217, 212, 189);
+  color: rgb(255, 255, 255);
+  background-color: rgb(181, 177, 158);
   border-radius: 20px;
   cursor: pointer;
 }
