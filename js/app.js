@@ -1,13 +1,29 @@
 let keyHolder = []
 
+// onkeydown = function holdKey(evt) {
+//   keyHolder[evt.keyCode] = evt.type === `keydown` 
+//   if (keyHolder[8] && keyHolder[16]) {
+//     ulList.removeChild(ulList.querySelector(`.list-item`))
+//     keyHolder.splice(0, keyHolder.length)
+//   } else if (!keyHolder[16]) {
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`works`)
+//   } 
+//   console.log(keyHolder)
+// }
+
 onkeydown = function holdKey(evt) {
   keyHolder[evt.keyCode] = evt.type === `keydown` 
-  if (keyHolder[8] && keyHolder[16]) {
+  if (keyHolder[8] && keyHolder[16] && keyHolder[13]) {
+    keyHolder.splice(0, keyHolder.length)
+  } else if (keyHolder[8] && keyHolder[16]) {
     ulList.removeChild(ulList.querySelector(`.list-item`))
     keyHolder.splice(0, keyHolder.length)
-  } else if (keyHolder[8]) {
+    console.log(`works`)
+  } else if (keyHolder[8] && !keyHolder[16]) {
     keyHolder.splice(0, keyHolder.length)
-  }
+    console.log(`empty`)
+  } 
   console.log(keyHolder)
 }
 
