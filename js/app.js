@@ -1,3 +1,17 @@
+let keyHolder = []
+
+onkeydown = function holdKey(evt) {
+  keyHolder[evt.keyCode] = evt.type === `keydown` 
+  if (keyHolder[8] && keyHolder[16]) {
+    ulList.removeChild(ulList.querySelector(`.list-item`))
+    keyHolder.splice(0, keyHolder.length)
+  } else if (keyHolder[8]) {
+    keyHolder.splice(0, keyHolder.length)
+  }
+  console.log(keyHolder)
+}
+
+
 // Cashed Element References //
 
 const h1 = document.querySelector(`h1`)
@@ -22,7 +36,7 @@ button.addEventListener(`click`, addLi)
 clickRemove.addEventListener(`click`, removeLi) 
 resetButton.addEventListener(`click`, resetUl) 
 form.addEventListener(`submit`, formEvt)
-window.addEventListener(`keydown`, delLi)
+window.addEventListener(`keydown`, keyHolder)
 
 // Functions //
 
@@ -65,10 +79,13 @@ function formEvt(evt) {
 //   }
 // }
 
-function delLi(evt) {
-  switch (evt.keyCode) {
-    case 8 && 16:
-      ulList.removeChild(ulList.querySelector(`.list-item`))
-      console.log(`keys were pressed`)
-  }
-}
+
+// function delLi(evt) {
+//   switch (evt.keyCode) {
+//     case 8 && 16:
+//       ulList.removeChild(ulList.querySelector(`.list-item`))
+//       console.log(`keys were pressed`)
+//   }
+// }
+
+
