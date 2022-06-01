@@ -8,9 +8,32 @@ body {
   display: flex;
 }
 
+button {
+  background-color: rgb(227, 227, 216);
+  font-family: 'Quicksand';
+  padding: .4em;
+  cursor: pointer;
+  border-radius: 10px;;
+}
+
+button:hover {
+  background-color: white;
+}
+
+input {
+  padding: .4em;
+  font-family: 'Quicksand';
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid black;
+}
+
 .list-item {
   color: black;
-  padding: .5em;
+  padding: .3em;
+  background-color: rgba(255, 255, 255, 0.505);
+  border-radius: 20px;
+  border: 1px solid black;
 }
 
 .list-item:hover {
@@ -62,6 +85,16 @@ ul {
   font-weight: 500;
   font-size: 3em;
   color: black;
+  position: relative;
+  top: -2em;
+}
+
+#chat-box {
+  position: relative;
+  top: -3em;
+}
+
+#todo-list {
   position: relative;
   top: -2em;
 }
