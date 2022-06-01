@@ -29,16 +29,16 @@ body {
 #nav {
   position: relative;
   background-color: rgb(227, 227, 208);
-  border: 1px solid red;
   top: -4.5em;
   border-radius: 20px;
 }
 
 #nav-text {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 100;
-  font-size: 1em;
+  font-weight: 200;
+  font-size: .75em;
   color: black;
+  padding: 1em;
 }
 
 ul {
@@ -59,7 +59,7 @@ ul {
 
 #main-text {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 3em;
   color: black;
   position: relative;

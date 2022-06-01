@@ -47,12 +47,12 @@ window.addEventListener(`keyup`, upKeyHolder)
 function addLi() {
   if (input.value !== '') {
     newLi = document.createElement(`li`)
-  newLi.textContent = input.value
-  input.value = ``
-  ulList.appendChild(newLi)
-  newLi.className = 'list-item'
-  console.log(`li added`)
-}
+    newLi.textContent = input.value
+    input.value = ``
+    ulList.appendChild(newLi)
+    newLi.className = 'list-item'
+    console.log(`li added`)
+  }
 }
 
 // On click of the li items within Ul it will remove them
@@ -76,45 +76,52 @@ function formEvt(evt) {
 }
 
 
-// key logger and shift delete li functionality 
+// key logger and shift delete li // shift delete enter reset ui // functionality 
+
+// I can turn this into a chat app! 
+
+// DEFINITELY REFRACTOR ANOTHER DAY
 
 onkeydown = function holdKey(evt) {
   keyHolder[evt.keyCode] = evt.type === `keydown` 
   if (keyHolder[8] && keyHolder[16] && keyHolder[13]) { 
     // if delete shift and enter exist at the same time in the array - empty the array 
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`empty with shift delete and enter`)
-  } else if (keyHolder[8] && keyHolder[16] && keyHolder[32]) {
-    console.log('RESET')
-    resetUl()
+      keyHolder.splice(0, keyHolder.length)
+      console.log(`empty with shift delete and enter`)
+  } else if (keyHolder[8] && keyHolder[16] && keyHolder[32]) { // shift delete enter reset 
+      console.log('RESET')
+      resetUl()
   } else if (keyHolder[16] && keyHolder[8]) { 
     // if shift and delete are pressed - delete a li and empty the array
-    ulList.removeChild(ulList.querySelector(`.list-item`))
-    do {
-    keyHolder.splice(0, keyHolder.length, 16)
-    console.log(`do while`)
-    } while (keyHolder === [])
-    console.log(`empty with shift and delete`)
+      ulList.removeChild(ulList.querySelector(`.list-item`))
+      do {
+        keyHolder.splice(0, keyHolder.length, 16)
+        console.log(`do while`)
+      } while (keyHolder === [])
+      console.log(`empty with shift and delete`)
   } else if (keyHolder[8] && !keyHolder[16]) { 
     // if delete exists (because the user deleted a word in input) and shift does not - empty the array
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`empty with delete and no shift`)
+      keyHolder.splice(0, keyHolder.length)
+      console.log(`empty with delete and no shift`)
   } else if (!keyHolder[16] && !keyHolder[8] && !keyHolder[32]) {
     // if shift and delete does not exist - dont log the array 
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`empty because its not shift or delete`)
+      keyHolder.splice(0, keyHolder.length)
+      console.log(`empty because its not shift or delete`)
   } else if (keyHolder[13]) { // if enter exists - empty the array 
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`empty with enter`)
+      keyHolder.splice(0, keyHolder.length)
+      console.log(`empty with enter`)
   } 
   console.log(keyHolder)
 }
 
+// adds a safeguard for clearing array if shift is lifted which in turn fixes bug that deleted li when 
+// user used special characters or capital letters
+
 onkeyup = function upKey(evt) {
   upKeyHolder[evt.keyCode] = evt.type === `keyup`
   if (upKeyHolder[16]) {
-  keyHolder.splice(0, keyHolder.length)
-  console.log(`log something please`)
+    keyHolder.splice(0, keyHolder.length)
+    console.log(`log something please`)
   } // else if (upKeyHolder[8]) {
   // keyHolder.splice(0, 0, 16)
   // console.log(`log 8 please`) 
