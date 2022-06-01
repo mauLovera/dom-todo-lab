@@ -1,7 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: rgb(137, 105, 105);
+  background-color: rgb(250, 248, 248);
+  margin: 0;
+  display: flex;
 }
 
 .list-item {
-  color: white;
+  color: black;
+  padding: .5em;
+}
+
+.list-item:hover {
+  color: red;
+  background-color: rgb(217, 212, 189);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.text-style {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5em;
+}
+
+ul {
+  padding-inline-start: 0;
+
+  list-style: none;
+  text-decoration: none;
+}
+
+#main {
+  position: relative;
+  top: 100px;
+  margin: auto;
+  background-color: rgb(227, 227, 208);
+  border-radius: 20px;
+  padding: 3em;
+}
+
+#main-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  color: black;
 }
