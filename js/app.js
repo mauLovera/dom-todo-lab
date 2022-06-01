@@ -77,7 +77,6 @@ function formEvt(evt) {
 
 
 // key logger and shift delete li functionality 
-// it works but has a bug if users use the shift key to put !@#$!@$! and those types of characters down it wont empty the array and they could potentially delete a list item without having to press shift and delete in succession 
 
 onkeydown = function holdKey(evt) {
   keyHolder[evt.keyCode] = evt.type === `keydown` 
@@ -85,25 +84,29 @@ onkeydown = function holdKey(evt) {
     // if delete shift and enter exist at the same time in the array - empty the array 
     keyHolder.splice(0, keyHolder.length)
     console.log(`empty with shift delete and enter`)
+  } else if (keyHolder[8] && keyHolder[16] && keyHolder[32]) {
+    console.log('RESET')
+    resetUl()
   } else if (keyHolder[16] && keyHolder[8]) { 
     // if shift and delete are pressed - delete a li and empty the array
     ulList.removeChild(ulList.querySelector(`.list-item`))
     do {
-    keyHolder.splice(0, keyHolder.length, 8)
+    keyHolder.splice(0, keyHolder.length, 16)
+    console.log(`do while`)
     } while (keyHolder === [])
     console.log(`empty with shift and delete`)
   } else if (keyHolder[8] && !keyHolder[16]) { 
     // if delete exists (because the user deleted a word in input) and shift does not - empty the array
     keyHolder.splice(0, keyHolder.length)
     console.log(`empty with delete and no shift`)
-  } else if (!keyHolder[16] && !keyHolder[8]) {
+  } else if (!keyHolder[16] && !keyHolder[8] && !keyHolder[32]) {
     // if shift and delete does not exist - dont log the array 
     keyHolder.splice(0, keyHolder.length)
     console.log(`empty because its not shift or delete`)
   } else if (keyHolder[13]) { // if enter exists - empty the array 
     keyHolder.splice(0, keyHolder.length)
     console.log(`empty with enter`)
-  }
+  } 
   console.log(keyHolder)
 }
 
@@ -112,7 +115,11 @@ onkeyup = function upKey(evt) {
   if (upKeyHolder[16]) {
   keyHolder.splice(0, keyHolder.length)
   console.log(`log something please`)
-  }
+  } // else if (upKeyHolder[8]) {
+  // keyHolder.splice(0, 0, 16)
+  // console.log(`log 8 please`) 
+  // console.log(keyHolder) 
+  // }
 }
 
 
