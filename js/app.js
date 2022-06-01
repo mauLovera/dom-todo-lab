@@ -1,9 +1,8 @@
-let keyHolder = []
 
 // onkeydown = function holdKey(evt) {
 //   keyHolder[evt.keyCode] = evt.type === `keydown` 
 //   if (keyHolder[8] && keyHolder[16]) {
-//     ulList.removeChild(ulList.querySelector(`.list-item`))
+  //     ulList.removeChild(ulList.querySelector(`.list-item`))
 //     keyHolder.splice(0, keyHolder.length)
 //   } else if (!keyHolder[16]) {
 //     keyHolder.splice(0, keyHolder.length)
@@ -12,21 +11,11 @@ let keyHolder = []
 //   console.log(keyHolder)
 // }
 
-onkeydown = function holdKey(evt) {
-  keyHolder[evt.keyCode] = evt.type === `keydown` 
-  if (keyHolder[8] && keyHolder[16] && keyHolder[13]) {
-    keyHolder.splice(0, keyHolder.length)
-  } else if (keyHolder[8] && keyHolder[16]) {
-    ulList.removeChild(ulList.querySelector(`.list-item`))
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`works`)
-  } else if (keyHolder[8] && !keyHolder[16]) {
-    keyHolder.splice(0, keyHolder.length)
-    console.log(`empty`)
-  } 
-  console.log(keyHolder)
-}
-
+// Variables //
+  
+let keyHolder = []
+let upKeyHolder = []
+let newLi = document.createElement(`li`)
 
 // Cashed Element References //
 
@@ -43,9 +32,6 @@ const ulList = document.querySelector(`#todo-list`)
 const clickRemove = document.querySelector(`#todo-list`)
 const delRemove = document.querySelector(`#todo-list`)
 
-// Variables //
-
-let newLi = document.createElement(`li`)
 
 // Event Listener //
 button.addEventListener(`click`, addLi)
@@ -53,19 +39,20 @@ clickRemove.addEventListener(`click`, removeLi)
 resetButton.addEventListener(`click`, resetUl) 
 form.addEventListener(`submit`, formEvt)
 window.addEventListener(`keydown`, keyHolder)
+window.addEventListener(`keyup`, upKeyHolder)
 
 // Functions //
 
 // On click of the Add todo button it will all the value of the input field to the todo ul as an li 
 function addLi() {
   if (input.value !== '') {
-  newLi = document.createElement(`li`)
+    newLi = document.createElement(`li`)
   newLi.textContent = input.value
   input.value = ``
   ulList.appendChild(newLi)
   newLi.className = 'list-item'
   console.log(`li added`)
-  }
+}
 }
 
 // On click of the li items within Ul it will remove them
@@ -88,20 +75,80 @@ function formEvt(evt) {
   evt.preventDefault();
 }
 
-// function delLi(evt) {
-//   if (evt.keyCode === 8) {
+
+// key logger and shift delete li functionality 
+// it works but has a bug if users use the shift key to put !@#$!@$! and those types of characters down it wont empty the array and they could potentially delete a list item without having to press shift and delete in succession 
+
+onkeydown = function holdKey(evt) {
+  keyHolder[evt.keyCode] = evt.type === `keydown` 
+  if (keyHolder[8] && keyHolder[16] && keyHolder[13]) { 
+    // if delete shift and enter exist at the same time in the array - empty the array 
+    keyHolder.splice(0, keyHolder.length)
+    console.log(`empty with shift delete and enter`)
+  } else if (keyHolder[16] && keyHolder[8]) { 
+    // if shift and delete are pressed - delete a li and empty the array
+    ulList.removeChild(ulList.querySelector(`.list-item`))
+    do {
+    keyHolder.splice(0, keyHolder.length, 8)
+    } while (keyHolder === [])
+    console.log(`empty with shift and delete`)
+  } else if (keyHolder[8] && !keyHolder[16]) { 
+    // if delete exists (because the user deleted a word in input) and shift does not - empty the array
+    keyHolder.splice(0, keyHolder.length)
+    console.log(`empty with delete and no shift`)
+  } else if (!keyHolder[16] && !keyHolder[8]) {
+    // if shift and delete does not exist - dont log the array 
+    keyHolder.splice(0, keyHolder.length)
+    console.log(`empty because its not shift or delete`)
+  } else if (keyHolder[13]) { // if enter exists - empty the array 
+    keyHolder.splice(0, keyHolder.length)
+    console.log(`empty with enter`)
+  }
+  console.log(keyHolder)
+}
+
+onkeyup = function upKey(evt) {
+  upKeyHolder[evt.keyCode] = evt.type === `keyup`
+  if (upKeyHolder[16]) {
+  keyHolder.splice(0, keyHolder.length)
+  console.log(`log something please`)
+  }
+}
+
+
+
+// onkeydown = function holdKey(evt) {
+//   keyHolder[evt.keyCode] = evt.type === `keydown` 
+//   if (keyHolder[8] && keyHolder[16] && keyHolder[13]) { 
+//     // if delete shift and enter exist at the same time in the array - empty the array 
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`empty with shift delete and enter`)
+//   } else if (keyHolder[16] && keyHolder[8]) { 
+//     // if shift and delete are pressed - delete a li and empty the array
+//     if (upKey[16]) {
+//       this.onkeydown = onkeyup = function onUpKey() {
+//         upKey[evt.keyCode] = evt.type === `keyup`
+//         keyHolder.splice(0, keyHolder.length)
+//         console.log(`log something please`)
+//       }
+//     } else {
 //     ulList.removeChild(ulList.querySelector(`.list-item`))
-//     console.log('Keys were pressed')
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`empty with shift and delete`)
+//     }
+//   } else if (keyHolder[8] && !keyHolder[16]) { 
+//     // if delete exists (because the user deleted a word in input) and shift does not - empty the array
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`empty with delete and no shift`)
+//   } else if (!keyHolder[16] && !keyHolder[8]) {
+//     // if shift and delete does not exist - dont log the array 
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`empty because its not shift or delete`)
+//   } else if (keyHolder[13]) { // if enter exists - empty the array 
+//     keyHolder.splice(0, keyHolder.length)
+//     console.log(`empty with enter`)
 //   }
-// }
-
-
-// function delLi(evt) {
-//   switch (evt.keyCode) {
-//     case 8 && 16:
-//       ulList.removeChild(ulList.querySelector(`.list-item`))
-//       console.log(`keys were pressed`)
-//   }
+//   console.log(keyHolder)
 // }
 
 
