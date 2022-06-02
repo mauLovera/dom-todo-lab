@@ -71,7 +71,7 @@ ul {
   text-decoration: none;
 }
 
-#main {
+#form {
   position: relative;
   top: 100px;
   margin: auto;
@@ -80,7 +80,7 @@ ul {
   padding: 3em;
 }
 
-#main-text {
+#form-text {
   font-family: 'Quicksand', sans-serif;
   font-weight: 500;
   font-size: 3em;
